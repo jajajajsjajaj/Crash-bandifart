@@ -85,6 +85,10 @@ This team does not own crash, all the rights go directly to Activision.
 			if(kadeLogo.alpha == 0.8) FlxTween.tween(kadeLogo, {alpha: 1}, 0.8, {ease: FlxEase.quartInOut});
 			else FlxTween.tween(kadeLogo, {alpha: 0.8}, 0.8, {ease: FlxEase.quartInOut});
 		}, 0);
+
+		#if mobileC
+		addVirtualPad(NONE, A);
+		#end
 	}
 
 	override function update(elapsed:Float)

@@ -2,7 +2,7 @@ package;
 import openfl.utils.Future;
 import openfl.media.Sound;
 import flixel.system.FlxSound;
-#if sys
+#if cpp
 import smTools.SMFile;
 import sys.FileSystem;
 import sys.io.File;
@@ -95,7 +95,7 @@ class FreeplayState extends MusicBeatState
 
 		trace("tryin to load sm files");
 
-		#if sys
+		#if windows
 		for(i in FileSystem.readDirectory("assets/sm/"))
 		{
 			trace(i);
@@ -235,6 +235,10 @@ class FreeplayState extends MusicBeatState
 			trace(md);
 		 */
 
+		 #if mobileC
+		 addVirtualPad(UP_DOWN, A_B);
+		 #end
+
 		super.create();
 	}
 
@@ -280,9 +284,9 @@ class FreeplayState extends MusicBeatState
 			FlxG.sound.music.volume -= 0.5 * FlxG.elapsed;
 		}
 
-		var upP = FlxG.keys.justPressed.UP;
-		var downP = FlxG.keys.justPressed.DOWN;
-		var accepted = FlxG.keys.justPressed.ENTER;
+		var upP = controls.UP_P;
+		var downP = controls.DOWN_P;
+		var accepted = controls.ACCEPT;
 
 		var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
 

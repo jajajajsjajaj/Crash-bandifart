@@ -29,7 +29,6 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
-import io.newgrounds.NG;
 import flixel.util.FlxSpriteUtil;
 import lime.app.Application;
 import openfl.Assets;
@@ -75,10 +74,7 @@ class PS1StartUp extends MusicBeatState
 		});
 		#end*/
 		
-		#if sys
-		if (!sys.FileSystem.exists(Sys.getCwd() + "/assets/replays"))
-			sys.FileSystem.createDirectory(Sys.getCwd() + "/assets/replays");
-		#end
+
 
 		@:privateAccess
 		{
@@ -111,9 +107,7 @@ class PS1StartUp extends MusicBeatState
 
 		new FlxTimer().start(1, function(tmr:FlxTimer)
 		{
-			LoadingState.loadAndSwitchState(new VideoState2("assets/videos/ps1startup.webm", function() {
-				FlxG.switchState(new TitleState());
-			}));
+			LoadingState.loadAndSwitchState(new VideoState("assets/videos/ps1startup.webm", new TitleState()));
 		});
 	}
 

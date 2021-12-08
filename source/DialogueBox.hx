@@ -233,7 +233,7 @@ class DialogueBox extends FlxSpriteGroup
 		box.screenCenter(X);
 		portraitLeft.screenCenter(X);
 
-		txt = new FlxText(500, 650, FlxG.width, "Press Shift to Skip",32);
+		txt = new FlxText(500, 650, FlxG.width, "Touch the screen to Skip",32);
 		txt.setFormat("VCR OSD Mono", 32, FlxColor.fromRGB(200, 200, 200), RIGHT);
 		txt.borderColor = FlxColor.BLACK;
 		txt.borderSize = 3;
@@ -342,7 +342,20 @@ class DialogueBox extends FlxSpriteGroup
 			dialogueStarted = true;
 		}
 
-		if (PlayerSettings.player1.controls.ACCEPT && dialogueStarted == true)
+		#if mobile
+		var justTouched:Bool = false;
+
+		for (touch in FlxG.touches.list)
+		{
+			justTouched = false;
+
+			if (touch.justReleased){
+				justTouched = true;
+			}
+		}
+		#end
+
+		if (PlayerSettings.player1.controls.ACCEPT #if mobile || justTouched #end && dialogueStarted == true)
 		{
 			remove(dialogue);
 				
